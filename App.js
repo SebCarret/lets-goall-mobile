@@ -1,21 +1,91 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { LogBox } from 'react-native';
+import { Provider as PaperProvider, DefaultTheme, configureFonts } from 'react-native-paper';
+import { useFonts } from 'expo-font';
+import Navigation from './screens/Navigation';
+
+LogBox.ignoreAllLogs();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  const [loaded] = useFonts({
+    Poppins: require('./assets/fonts/Poppins-Regular.ttf'),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
+  return (
+    <PaperProvider theme={theme}>
+      <Navigation />
+    </PaperProvider>
+  )
+};
+
+const fontConfig = {
+  web: {
+    regular: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
+    medium: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
+    light: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
+    thin: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
   },
-});
+  ios: {
+    regular: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
+    medium: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
+    light: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
+    thin: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
+  },
+  android: {
+    regular: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
+    medium: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
+    light: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
+    thin: {
+      fontFamily: 'Poppins',
+      fontWeight: 'normal',
+    },
+  }
+};
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#4392F1',
+    error: '#DC493A'
+  },
+  fonts: configureFonts(fontConfig)
+};
